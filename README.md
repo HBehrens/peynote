@@ -10,7 +10,9 @@ The Pebble app allows you to
  - quickly see the total time you spent on your presentation
  - see the time you spent on the current slide
   
-[![Video: How peynote works](http://img.youtube.com/vi/vOZKbtwSGeI/0.jpg)](http://www.youtube.com/watch?v=vOZKbtwSGeI) 
+
+
+[![Video: How peynote works](resources/video.jpg)](http://www.youtube.com/watch?v=vOZKbtwSGeI) 
  
 ## Installation
 
