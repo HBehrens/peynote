@@ -1,21 +1,24 @@
 #include <pebble.h>
 
 static Window *window;
-static TextLayer *text_layer;
+static TextLayer *total_time_layer;
+static TextLayer *slide_time_layer;
+
+static int total_seconds;
+static int slide_seconds;
 
 static void select_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Select");
   APP_LOG(APP_LOG_LEVEL_DEBUG, "SELECT");
 }
 
 static void up_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Up");
   APP_LOG(APP_LOG_LEVEL_DEBUG, "UP");
+  slide_seconds = 0;
 }
 
 static void down_click_handler(ClickRecognizerRef recognizer, void *context) {
-  text_layer_set_text(text_layer, "Down");
   APP_LOG(APP_LOG_LEVEL_DEBUG, "DOWN");
+  slide_seconds = 0;
 }
 
 static void click_config_provider(void *context) {
@@ -24,18 +27,52 @@ static void click_config_provider(void *context) {
   window_single_click_subscribe(BUTTON_ID_DOWN, down_click_handler);
 }
 
+void format_seconds(int passed_seconds, char *buffer, size_t len) {
+  int seconds = passed_seconds % 60;
+  int minutes = (passed_seconds / 60) % 60;
+  int hours = (passed_seconds / 3600);
+
+  if(hours > 0) {
+    snprintf(buffer, len, "%d:%02d:%02d", hours, minutes, seconds);
+  } else {
+    snprintf(buffer, len, "%d:%02d", minutes, seconds);
+  }
+}
+
+static void update_text_layers(void *data) {
+  total_seconds++;
+  slide_seconds++;
+
+  static char total_str[20];
+  format_seconds(total_seconds, total_str, sizeof(total_str));
+  text_layer_set_text(total_time_layer, total_str);
+
+  static char slide_str[20];
+  format_seconds(slide_seconds, slide_str, sizeof(slide_str));
+  text_layer_set_text(slide_time_layer, slide_str);
+
+  app_timer_register(1000, update_text_layers, NULL);
+}
+
 static void window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  text_layer = text_layer_create((GRect) { .origin = { 0, 72 }, .size = { bounds.size.w, 20 } });
-  text_layer_set_text(text_layer, "Press a button");
-  text_layer_set_text_alignment(text_layer, GTextAlignmentCenter);
-  layer_add_child(window_layer, text_layer_get_layer(text_layer));
+  total_time_layer = text_layer_create((GRect) { .origin = { 0, 40 }, .size = { bounds.size.w, 50 } });
+  text_layer_set_font(total_time_layer, fonts_get_system_font(FONT_KEY_BITHAM_42_MEDIUM_NUMBERS));
+  text_layer_set_text_alignment(total_time_layer, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(total_time_layer));
+
+  slide_time_layer = text_layer_create((GRect) { .origin = { 0, 90 }, .size = { bounds.size.w, 24 } });
+  text_layer_set_font(slide_time_layer, fonts_get_system_font(FONT_KEY_ROBOTO_CONDENSED_21));
+  text_layer_set_text_alignment(slide_time_layer, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(slide_time_layer));
+
+  update_text_layers(NULL);
 }
 
 static void window_unload(Window *window) {
-  text_layer_destroy(text_layer);
+  text_layer_destroy(total_time_layer);
 }
 
 static void init(void) {
@@ -60,4 +97,5 @@ int main(void) {
 
   app_event_loop();
   deinit();
+  return 0;
 }
