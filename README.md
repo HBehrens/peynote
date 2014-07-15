@@ -1,6 +1,6 @@
 # Peynote
 
-Disclaimer: This setup is for people who have some experience with the [Pebble SDK][PebbleSDK], the command line, and have a decent python setup on their Mac.
+Disclaimer: This setup is for people who have some experience with the [Pebble SDK][PebbleSDK], the command line, and have a decent Python setup on their Mac.
 
 If you follow the steps below you can use your Pebble smartwatch to remote control your Keynote presentation without a Wifi or your phone, directly from your Mac via Bluetooth.
 
@@ -26,7 +26,7 @@ When you run the `peynote.py` command it will respond with this simple message:
 
 As you can see, this setup is a real hack!
 
-The pebble app you installed earlier uses `APP_LOG("UP")` to signal a button press to Pebble's standard log output.
+The Pebble app you installed earlier uses `APP_LOG("UP")` to signal a button press to Pebble's standard log output.
 The `pebble logs` command from the Pebble SDK receives these logs for every button your press in the app.
 When piping this output to `peynote.py` it will scan for "UP" and "DOWN" to detect the relevant presses and
 uses `ScriptingBridge` (Python's way to use AppleScript-enabled applications) to remote control your running Keynote instance.
