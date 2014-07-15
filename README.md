@@ -9,6 +9,8 @@ The Pebble app allows you to
  - go to the previous/next slide via the up/down buttons
  - quickly see the total time you spent on your presentation
  - see the time you spent on the current slide
+  
+[![Video: How peynote works](http://img.youtube.com/vi/vOZKbtwSGeI/0.jpg)](http://www.youtube.com/watch?v=vOZKbtwSGeI) 
  
 ## Installation
 
