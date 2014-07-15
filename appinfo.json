@@ -1,8 +1,8 @@
 {
   "uuid": "0d4c282b-0955-47ff-9664-71328eb6f181",
-  "shortName": "peynote",
-  "longName": "peynote",
-  "companyName": "MakeAwesomeHappen",
+  "shortName": "Peynote",
+  "longName": "Peynote",
+  "companyName": "Heiko Behrens",
   "versionCode": 1,
   "versionLabel": "1.0.0",
   "watchapp": {
@@ -12,6 +12,13 @@
     "dummy": 0
   },
   "resources": {
-    "media": []
+    "media": [
+        {
+            "type": "png",
+            "name": "ICON",
+            "file": "icon.png",
+            "menuIcon": true
+        }
+    ]
   }
 }
