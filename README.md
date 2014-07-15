@@ -1,6 +1,6 @@
 # Peynote
 
-Disclaimer: This setup is for people who have some experience with the Pebble SDK, the command line, and have a decent python setup on their Mac.
+Disclaimer: This setup is for people who have some experience with the [Pebble SDK][PebbleSDK], the command line, and have a decent python setup on their Mac.
 
 If you follow the steps below you can use your Pebble smartwatch to remote control your Keynote presentation without a Wifi or your phone, directly from your Mac via Bluetooth.
 
@@ -33,7 +33,7 @@ uses `ScriptingBridge` (Python's way to use AppleScript-enabled applications) to
 
 ## FAQ
 
-### Can I use it with Deckset
+### Can I use it with Deckset?
 
 Not at the moment. But as Deckset supports AppleScript it should be fairly easy to do.
 Feel free to submit a pull request.
@@ -43,13 +43,15 @@ Feel free to submit a pull request.
 Nope.
 Use the `pebble` command with `--pebble_id` or the `PEBBLE_BTID` environment variable to establish a bluetooth connection directly from your Mac.
 
-NOTE: This requires [Python lightblue to be installed][lightblue].arkdow
+NOTE: This requires [Python lightblue to be installed][lightblue].
 
 ### Can I still use my phone?
 
 Sure!
-Use the `pebble` command with the `--phone` or the `PEBBLE_PHONE` environment variable as suggested by the Pebble SDK setup.
+Use the `pebble` command with the `--phone` or the `PEBBLE_PHONE` environment variable [as suggested by the Pebble SDK setup][PebbleHelloWorld].
 You will have to put the official Pebble app into the *developer mode*, also your Mac and the phone have to be on the same Wifi.
 
 
 [lightblue]: http://forums.getpebble.com/discussion/comment/111815/#Comment_111815
+[PebbleSDK]: https://developer.getpebble.com/2/getting-started/macosx/
+[PebbleHelloWorld]: https://developer.getpebble.com/2/getting-started/hello-world/
